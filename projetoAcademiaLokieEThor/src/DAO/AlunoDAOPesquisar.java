@@ -15,9 +15,9 @@ public class AlunoDAOPesquisar {
     public boolean PesquisarAluno(AlunosDTO objAlunosDTO) throws SQLException{
         
      int cod=objAlunosDTO.getId_aluno();
-     ConexaoDAO conn = new ConexaoDAO();
+     //ConexaoDAO conn = new ConexaoDAO();
      
-     PreparedStatement pstm = conn.getConexao().prepareStatement("SELECT * FROM alunoacademia where id_aluno = ?");
+     PreparedStatement pstm = new ConexaoDAO().getConexao().prepareStatement("select * from alunoacademia where id_aluno=?");
      pstm.setInt(1,cod);
      
      ResultSet rs = pstm.executeQuery();

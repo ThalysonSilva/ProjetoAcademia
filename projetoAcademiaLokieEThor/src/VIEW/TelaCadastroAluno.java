@@ -518,15 +518,19 @@ public class TelaCadastroAluno extends javax.swing.JInternalFrame {
         if (valorSelecionado == "Básico") {
             jFTF_ValoraPagar_Aluno.setText("RS 60.00");
             JOptionPane.showMessageDialog(null, "O valor para o Plano Básico deve ser RS 60,00 ");
+            jFTF_ValoraPagar_Aluno.setText("60");
         } else if (valorSelecionado == "Premium") {
             jFTF_ValoraPagar_Aluno.setText("RS 70.00");
             JOptionPane.showMessageDialog(null, "O valor para o Plano Premium deve ser RS 70,00 ");
+            jFTF_ValoraPagar_Aluno.setText("70");
         } else if (valorSelecionado == "Gympass") {
             jFTF_ValoraPagar_Aluno.setText("RS 80.00");
             JOptionPane.showMessageDialog(null, "O valor para o Plano Gympass deve ser RS 80,00 ");
+            jFTF_ValoraPagar_Aluno.setText("80");
         } else if (valorSelecionado == "Master Plus") {
             jFTF_ValoraPagar_Aluno.setText("RS 90.00");
             JOptionPane.showMessageDialog(null, "O valor para o Plano Master Plus deve ser RS 90,00 ");
+            jFTF_ValoraPagar_Aluno.setText("90");
         } else {
             jFTF_ValoraPagar_Aluno.setText("");
 
@@ -691,15 +695,26 @@ public class TelaCadastroAluno extends javax.swing.JInternalFrame {
 
             try {
 
-                if (objPesquisarAluno.PesquisarAluno(objAlunosDTO)) {
-                    if (objAlunosDTO != null) {
+                if (objPesquisarAluno.PesquisarAluno(objPesquisarAlunoDTO)) {
+                    if (objPesquisarAlunoDTO != null) {
 
-                        pesquisarAluno();
+                        jTF_Nome.setText(objPesquisarAlunoDTO.getNome());
+                        jFTF_CPF_Aluno.setText(objPesquisarAlunoDTO.getCpf());
+                        jTF_EnderecoAluno.setText(objPesquisarAlunoDTO.getEnd());
+                        jFTF_DataNasc_Aluno.setText(objPesquisarAlunoDTO.getDataNascimento());
+                        jFTF_Contato_Aluno.setText(objPesquisarAlunoDTO.getTelefone());
+                        jComboBoxSexoAluno.setSelectedItem(objPesquisarAlunoDTO.getSexo());
+                        jComboBoxModalidadeAluno.addItem(objPesquisarAlunoDTO.getModalidade());
+                        jFTF_ValoraPagar_Aluno.setText(Integer.toString(objPesquisarAlunoDTO.getMensalidade())); // linha onde está dando o erro
+                        jFTF_DatadoCadastro_Aluno.setText(objPesquisarAlunoDTO.getDatCadastro());
+                        jComboBoxSituacaoAluno.setSelectedItem(objPesquisarAlunoDTO.getSituacao());
+                        jFTF_Multa_Aluno.setText(Integer.toString(objPesquisarAlunoDTO.getMulta())); // linha onde está dando o erro
+                        jButtonEditarAluno.setEnabled(true);
 
                     }
                 }
 
-            } catch (Exception e) {
+            } catch (SQLException e) {
 
                 JOptionPane.showMessageDialog(this, "Erro Ao Pesquisar" + e.getMessage());
 
@@ -707,19 +722,19 @@ public class TelaCadastroAluno extends javax.swing.JInternalFrame {
 
         }
 
-        jTF_Nome.setText(objAlunosDTO.getNome());
+        /*jTF_Nome.setText(objAlunosDTO.getNome());
         jFTF_CPF_Aluno.setText(objAlunosDTO.getCpf());
         jFTF_Contato_Aluno.setText(objAlunosDTO.getTelefone());
         jFTF_DataNasc_Aluno.setText(objAlunosDTO.getDataNascimento());
         jComboBoxSexoAluno.setSelectedItem(objAlunosDTO.getSexo());
         jTF_EnderecoAluno.setText(objAlunosDTO.getEnd());
         jComboBoxModalidadeAluno.setSelectedItem(objAlunosDTO.getModalidade());
-        jFTF_ValoraPagar_Aluno.setSelectionEnd(objAlunosDTO.getMensalidade()); // linha onde está dando o erro
+        jFTF_ValoraPagar_Aluno.setText(Integer.toString(objAlunosDTO.getMensalidade())); // linha onde está dando o erro
         jFTF_DatadoCadastro_Aluno.setText(objAlunosDTO.getDatCadastro());
         jComboBoxSituacaoAluno.setSelectedItem(objAlunosDTO.getSituacao());
-        //jFTF_Multa_Aluno.setSelectionEnd(objAlunosDTO.getMulta()); // linha onde está dando o erro
+        jFTF_Multa_Aluno.setText(Integer.toString(objAlunosDTO.getMulta())); // linha onde está dando o erro
         jButtonEditarAluno.setEnabled(true);
-
+         */
     }
 
     private void setExtendedState(int MAXIMIZED_BOTH) {
@@ -762,11 +777,12 @@ public class TelaCadastroAluno extends javax.swing.JInternalFrame {
 
             JOptionPane.showMessageDialog(null, "Selecione A Modalidade");
             jComboBoxModalidadeAluno.requestFocus();
-
-        } else if (jFTF_ValoraPagar_Aluno.getText().equals("")) {
+            
+        }else if (jFTF_ValoraPagar_Aluno.getText().equals("")) {
 
             JOptionPane.showMessageDialog(null, "Digitar o Valor a pagar");
             jFTF_ValoraPagar_Aluno.requestFocus();
+ 
 
         } else if (jFTF_DatadoCadastro_Aluno.getText().equals("  /  /    ")) {
 
