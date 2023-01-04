@@ -704,7 +704,7 @@ public class TelaCadastroAluno extends javax.swing.JInternalFrame {
                         jFTF_DataNasc_Aluno.setText(objPesquisarAlunoDTO.getDataNascimento());
                         jFTF_Contato_Aluno.setText(objPesquisarAlunoDTO.getTelefone());
                         jComboBoxSexoAluno.setSelectedItem(objPesquisarAlunoDTO.getSexo());
-                        jComboBoxModalidadeAluno.addItem(objPesquisarAlunoDTO.getModalidade());
+                        jComboBoxModalidadeAluno.addItem(objPesquisarAlunoDTO.getModalidade()); // slectItem
                         jFTF_ValoraPagar_Aluno.setText(Integer.toString(objPesquisarAlunoDTO.getMensalidade())); // linha onde está dando o erro
                         jFTF_DatadoCadastro_Aluno.setText(objPesquisarAlunoDTO.getDatCadastro());
                         jComboBoxSituacaoAluno.setSelectedItem(objPesquisarAlunoDTO.getSituacao());
